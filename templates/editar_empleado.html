@@ -1,0 +1,109 @@
+
+
+{% extends 'layout.html' %}
+{% block body %}
+<div class="card col-sm-10 m-auto mt-2 p-5">
+    <h2 class="text-center mt-2">EDITAR EMPLEADOS</h2>
+    
+    <form action="{{ url_for('editar_empleado')}}" method="post" class="form">
+        
+        {{ form.csrf_token }} 
+        <table class="table table-hover mt-3 mb-4">
+            <td></td><td></td><td></td><td></td>
+            <td>
+
+       
+        <div class="mb-3">
+            <div class="col-sm-3">
+                <label class="form-label">{{ form.documento.label }}</label>
+            </div>                
+            {{ form.documento(value = empleado[1])}}          
+        </div>     
+
+        <div class="mb-3">
+            <div class="col-sm-3">
+                <label class="form-label">{{ form.nombre.label }}</label>
+            </div>
+            {{ form.nombre(value = empleado[2])}}
+        </div>
+        <div class="mb-3">
+            <div class="col-sm-3">
+                <label class="form-label">{{ form. apellido.label }}</label>
+            </div>
+            {{ form.apellido(value = empleado[3])}}
+        </div>
+        <div class="mb-3">
+            <div class="col-sm-3">
+                <label class="form-label">{{ form.telefono.label }}</label>
+            </div>
+            {{ form.telefono(value = empleado[4])}}
+        </div>
+        <div class="mb-3">
+            <div class="col-sm-3">
+                <label class="form-label">{{ form.direccion.label }}</label>
+            </div>
+            {{ form.direccion(value = empleado[5])}}
+        </div>
+    </td>
+    <td></td><td></td><td></td><td></td>
+    <td>
+        <div class="mb-3">
+            <div class="col-sm-3">
+                <label class="form-label">{{ form.correo.label }}</label>
+            </div>
+            {{ form.correo(value = empleado[6])}}
+        </div>
+
+    
+        
+           
+        <div class="mb-3">
+            <div class="col-sm-6">
+                
+                <label class="form-label" >{{ form.fecha_in.label }}</label>
+            </div>
+            {{ form.fecha_in(value = empleado[7])}}
+        </div>
+
+        <div class="mb-3">
+            <div class="col-sm-6">
+                <label class="form-label">{{ form.tipo_con.label }}</label>
+            </div>
+            {{ form.tipo_con(value = empleado[8])}}
+        </div>
+
+        <div class="mb-3">  
+            <div class="col-sm-6">
+            <label class="form-label">{{ form.fecha_ter.label }}</label>
+            </div>
+        {{ form.fecha_ter(value = empleado[9])}}
+        
+           
+        </div>
+
+
+        <div class="mb-3">
+            <div class="col-sm-6">
+                <label class="form-label">{{ form.cargo.label }}</label>
+            </div>
+            {{ form.cargo(value = empleado[10])}}
+        </div>
+
+        <div class="mb-3">
+            <div class="col-sm-6">
+                <label class="form-label">{{ form.salario.label }}</label>
+            </div>
+            {{ form.salario(value = empleado[11])}}
+        </div>
+    </td>
+        </table>
+                       
+        <input type="text" value="{{ empleado[0]}}" name="id" hidden>                  
+        <button class="btn btn-success form-control">Editar Empleados</button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+    {% endblock %}

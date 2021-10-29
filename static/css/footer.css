@@ -1,0 +1,26 @@
+footer {
+    background-color:#157448 ;
+    width:100%;
+    border: green 1px seagreen;
+
+   
+}
+
+footer {
+	text-align: center;
+	padding: 9px 0 10px ;
+	
+}
+
+footer p {
+	color: #f8f8f8;
+	font-size: 9px;
+}
+
+footer a.totop {
+	color: #fff;
+	margin-bottom: 30px;
+}
+footer a.totop:focus {
+	outline: 0;
+}

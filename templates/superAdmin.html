@@ -1,0 +1,140 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<body>
+  
+  <div class="container row-12 bg-white mt-5 rounded-2 shadow p-2">
+    <div class="d-flex bd-highlight">
+      <div class="col-8 d-flex flex-row bd-highlight mb-3">
+
+        <div class="col-3 d-flex flex-column bd-highlight mb-3">
+          <img class="w-75" src="/static/images/cara.png" alt="Imagenes" />
+        </div>
+
+        <div class="col-6 d-flex flex-column bd-highlight mb-3">
+          <h1 class="text-success">Bienvenido(a)</h1>
+
+          {% if 'user' in session %}
+
+       
+          <h2>Nombre:  {{ session['user']}}</h2>
+          <h2>Apellido:  {{ session['apellido']}}</h2>
+          {% endif %}
+
+          
+      
+          
+        <div class="col-md-10 d-flex flex-row bd-highlight mb-3">
+          
+          <a class="btn btn-success" href="{{url_for('superAdmin')}}" role="button">Atras</a>
+         
+          <div class="col-3 d-flex flex-row bd-highlight mb-3">
+          </div>
+          
+          <a class="btn btn-success" href="{{url_for('empleado')}}" role="button">Ver mi informe</a>
+        </div>
+       
+      </div>
+        
+       
+
+
+      </div>
+
+      <div class="col-3 d-flex flex-column bd-highlight mb-4">
+
+        <a class="btn btn-success mb-2" href="{{url_for('registEmp')}}" role="button">Agregar Empleado</a>
+       
+          <div class=" d-flex flex-column bd-highlight mb-1">
+
+            <div class="container mb-3">
+              <form action="{{url_for('search')}}" method="post">
+             <h4> <center> <label for="buscar">Buscar Empleado</label></center></h4> 
+                <input class="form-control   btn-outline-success" placeholder="Nombre" type="text" name="buscar" id="buscar">
+                <br>
+
+                <button class="btn btn-success mb-1 form-control" type="submit">Buscar</button>
+              </form>
+            </div>
+
+           
+       
+
+        </div>
+      </div>
+
+    </div>
+     
+    <center>
+    {% with mensajes = get_flashed_messages() %}
+    {% if mensajes %}
+            {% for m in mensajes %}
+                   <p>{{ m }}</p> 
+            {% endfor %}                            
+    {% endif %}
+    {% endwith %}</center>
+
+    <div class="col-3 d-flex flex-column bd-highlight mb-4">
+      <div class="col-sm-3"></div>
+      <table class="table table-hover mt-3 mb-4">
+        <thead class="table-dark">
+          <tr>
+        
+            <th scope="col">Nº Documento</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Cargo</th>
+            <th scope="col">Elimina</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Informe</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for emp in empleado %}
+          <tr>
+            
+            <td>{{emp[1]}}</td>
+            <td>{{emp[2]}}</td>
+            <td>{{emp[3]}}</td>
+            <td>{{emp[4]}}</td>
+            <td>{{emp[5]}}</td>
+            <td>{{emp[6]}}</td>
+            <td>{{emp[10]}}</td>
+            <td><a class="btn btn-danger delete" href="{{url_for('deleteEmp', id=emp[0])}}">Eliminar</a></td>
+            <td><a class="btn btn-info" href="{{url_for('editar_empleado', id= emp[0])}}">Editar</a></td>
+            <td><a class="btn btn-primary" href="{{url_for('regisInf', id= emp[0])}}">Generar</a></td> 
+
+
+
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+     
+
+    </div>
+  </div>
+  </div>
+
+
+  <script>
+    const btnDelete = document.querySelectorAll('.delete');
+    if (btnDelete) {
+      const btnArray = Array.from(btnDelete);
+      btnArray.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          if (!confirm('¿Estás seguro que deseas eliminar este registro?')) {
+            e.preventDefault();
+          }
+        });
+      })
+    }
+  </script>
+  {% endblock %}

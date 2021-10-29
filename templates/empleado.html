@@ -1,0 +1,120 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<body>
+  
+  <div class="container row-12 bg-white mt-5 rounded-2 shadow p-2">
+    <div class="d-flex bd-highlight">
+      <div class="col-8 d-flex flex-row bd-highlight mb-3">
+
+        <div class="col-3 d-flex flex-column bd-highlight mb-3">
+          <img class="w-75" src="/static/images/cara.png" alt="Imagenes" />
+        </div>
+
+        <div class="col-6 d-flex flex-column bd-highlight mb-3">
+          <h1 class="text-success">Bienvenido(a)</h1>
+
+          {% if 'user' in session %}
+
+       
+          <h2>Nombre:{{ session['user']}}</h2>
+          <h2>Apellido:{{ session['apellido']}}</h2>
+          {% endif %}
+
+          
+      
+        </div>
+        
+        <div class="col-6 d-flex flex-column bd-highlight mb-3">
+    
+      
+          <a class="btn btn-success" href="{{url_for('Login')}}" role="button">Atras</a>
+        </div>
+      
+
+
+      </div>
+
+
+    </div>
+     
+    <center>
+    {% with mensajes = get_flashed_messages() %}
+    {% if mensajes %}
+            {% for m in mensajes %}
+                   <p>{{ m }}</p> 
+            {% endfor %}                            
+    {% endif %}
+    {% endwith %}</center>
+
+    <div class="col-5 d-flex flex-column bd-highlight mb-4">
+      <div class="col-sm-5"></div>
+      <table class="table table-hover mt-3 mb-4">
+        <thead class="table-dark">
+          <tr>
+        
+            <th scope="col">Nº Documento</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Correo</th>
+            <th scope="colgroup">Fecha ingreso</th>
+            <th scope="colgroup">Tipo Contraro</th>
+            <th scope="colgroup">Fecha Fin</th>
+            <th scope="colgroup">Salario</th>
+
+            <th scope="col">Calificación</th>
+            <th scope="col">Retroalimentacion</th>
+          
+            
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for emp in empleado %}
+          <tr>
+            
+            <td>{{ session['cedula']}}</td>
+            <td>{{ session['user']}}</td>
+            <td>{{ session['apellido']}}</td>
+            <td>{{ session['telefono']}}</td>
+            <td>{{ session['correo']}}</td>
+            <td>{{ session['fecha_in']}}</td>
+            <td>{{ session['tipo_con']}}</td>
+            <td>{{ session['fecha_ter']}}</td>
+            <td>{{ session['salario']}}</td>
+
+            
+            <td>{{emp[2]}}</td>
+            <td>{{emp[3]}}</td>
+           
+
+
+
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+     
+
+    </div>
+  </div>
+  </div>
+
+
+  <script>
+    const btnDelete = document.querySelectorAll('.delete');
+    if (btnDelete) {
+      const btnArray = Array.from(btnDelete);
+      btnArray.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          if (!confirm('¿Estás seguro que deseas eliminar este registro?')) {
+            e.preventDefault();
+          }
+        });
+      })
+    }
+  </script>
+  {% endblock %}
